@@ -2,18 +2,16 @@
 
 Current phase: `MVP_BUILD_OR_REVIEW`
 
-Current checkpoint: `P2_SYNTHETIC_FIXTURE_GREEN`
+Current checkpoint: `P3_UNIT_CONTRACT_LOCAL_GREEN_CI_PENDING`
 
 - P0 Foundation: **GREEN / CLOSED**
 - P1 QA Core + Safety Guards: **GREEN / CLOSED**
-- P1.1 TypeScript/Jest/ESLint restoration: **GREEN / CLOSED**
+- P1.1 Toolchain Restoration: **GREEN / CLOSED**
 - P2 Synthetic Fixture Service: **GREEN / CLOSED**
 - P2 implementation commit: `1db9e4a2d64a0d6568bf397adf7c4282500829df`
-- P2 clean GitHub Actions gate: **GREEN** (run `34038503928`)
-- P2 gate coverage: fresh `npm ci`, lint, typecheck, secret guard, cloud-mutation guard, existing unit tests, existing contract tests, P2 runtime smoke, full P0-P2 regression
-- P3 Unit + Contract Tests: **NOT IMPLEMENTED**
-- P4+: **NOT IMPLEMENTED**
+- P2 clean GitHub Actions gate: **GREEN**
+- P3 Unit + Contract Tests: **IMPLEMENTED; LOCAL GATES PENDING**
+- P4 Integration Tests: **NOT IMPLEMENTED**
+- P5+: **NOT IMPLEMENTED**
 
-P2 remains local-only, loopback-only, synthetic-data-only, and uses deterministic startup-configured fault modes.
-
-No AWS credentials, Stacktape credentials, customer data, production Stacktape calls, cloud-mutating commands, or Pass 3 code were introduced during P2.
+Pass 3 adds only unit and contract coverage plus shared fixture request/response contracts. It does not implement Pass 4 integration behavior.

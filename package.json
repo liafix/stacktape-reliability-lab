@@ -20,7 +20,8 @@
     "qa:p1": "npm run lint && npm run typecheck && npm run test:unit && npm run test:contract && npm run guard:secrets && npm run guard:cloud",
     "fixture:start": "node --no-warnings --experimental-strip-types apps/fixture-service/src/server.ts",
     "test:p2-smoke": "node --no-warnings --experimental-strip-types scripts/p2-smoke.ts",
-    "qa:p2": "npm run lint && npm run typecheck && npm run guard:secrets && npm run guard:cloud && npm run test:unit && npm run test:contract && npm run test:p2-smoke && npm test"
+    "qa:p2": "npm run lint && npm run typecheck && npm run guard:secrets && npm run guard:cloud && npm run test:unit && npm run test:contract && npm run test:p2-smoke && npm test",
+    "qa:p3": "npm run lint && npm run typecheck && npm run guard:secrets && npm run guard:cloud && npm run test:unit && npm run test:contract && npm run test:p2-smoke && npm test"
   },
   "engines": {
     "node": ">=22 <23"

@@ -2,15 +2,10 @@ import express, {
   type Request,
   type Response
 } from 'express';
-import { z } from 'zod';
+import { createItemInputSchema } from './contracts.ts';
 import { createFaultController, type FaultDecision } from './fault-controller.ts';
 import { createFixtureStore } from './store.ts';
 import type { FixtureConfig } from './types.ts';
-
-const createItemSchema = z.object({
-  name: z.string().trim().min(1).max(120),
-  description: z.string().trim().min(1).max(500).nullable().optional().default(null)
-}).strict();
 
 function sendFault(
   decision: FaultDecision,
@@ -88,7 +83,7 @@ export function createFixtureApp(config: FixtureConfig) {
     const decision = await faults.beforeItemRequest();
     if (sendFault(decision, response)) return;
 
-    const parsed = createItemSchema.safeParse(request.body);
+    const parsed = createItemInputSchema.safeParse(request.body);
     if (!parsed.success) {
       response.status(400).json({
         error: {
