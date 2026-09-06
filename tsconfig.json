@@ -1,12 +1,21 @@
-﻿{
+{
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "types": ["node", "jest"]
+    "types": [
+      "node",
+      "jest"
+    ],
+    "allowImportingTsExtensions": true
   },
   "include": [
     "packages/qa-core/src/**/*.ts",
     "scripts/**/*.ts",
-    "tests/**/*.ts"
+    "tests/**/*.ts",
+    "apps/fixture-service/src/**/*.ts"
   ],
-  "exclude": ["node_modules", "dist", "coverage"]
+  "exclude": [
+    "node_modules",
+    "dist",
+    "coverage"
+  ]
 }

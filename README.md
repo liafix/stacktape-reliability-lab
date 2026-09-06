@@ -6,7 +6,8 @@ Independent candidate QA automation demonstrator for the Stacktape QA Automation
 
 - Pass 0: repository foundation and reproducibility contract
 - Pass 1: QA-core contracts plus secret/cloud-mutation safety guards
-- Pass 2+: intentionally not implemented yet
+- Pass 2: synthetic localhost fixture service implemented
+- Pass 3+: intentionally not implemented yet
 
 ## Safety boundary
 
