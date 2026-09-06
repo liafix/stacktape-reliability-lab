@@ -2,18 +2,20 @@
 
 Current phase: `MVP_BUILD_OR_REVIEW`
 
-Current checkpoint: `P1_1_TOOLCHAIN_RESTORATION_BLOCKED`
+Current checkpoint: `P1_1_TOOLCHAIN_RESTORATION_GREEN`
 
-- P0 Foundation: implemented; GREEN on bootstrap toolchain
-- P1 QA Core + Safety Guards: implemented; GREEN on bootstrap toolchain
-- P1.1 Approved TypeScript/Jest/ESLint restoration: **BLOCKED** by npm registry DNS/network availability
-- P1.1 latest recheck: 2026-09-05 17:28 Europe/Bratislava — `registry.npmjs.org` still does not resolve (`curl: (6)`, npm `EAI_AGAIN`)
-- Jest migration: not started
-- ESLint migration: not started
-- `types/node-shim.d.ts` removal: not started
+- P0 Foundation: **GREEN**
+- P1 QA Core + Safety Guards: **GREEN**
+- P1.1 TypeScript/Jest/ESLint restoration: **GREEN / CLOSED**
+- Node.js: `22.23.2`
+- Jest migration: complete
+- ESLint migration: complete
+- `@types/node` restoration: complete
+- bootstrap Node shim/fallbacks: removed
+- clean GitHub Actions P1.1 gate: **GREEN** on commit `fa7967573af8e0f0d3fc9585ba6c1ca5fc49fb93`
 - P2 Synthetic Fixture Service: **NOT IMPLEMENTED**
-- P3+: not implemented
+- P3+: **NOT IMPLEMENTED**
 
-No cloud resources, credentials, deployments, production-system calls, alternate registry workarounds, dependency vendoring, or Pass 2 code have been introduced.
+The original npm-registry blocker is retained only as historical audit evidence in `docs/P1_1_TOOLCHAIN_BLOCKER.md` and is resolved.
 
-See `docs/P1_1_TOOLCHAIN_BLOCKER.md` for exact blocker evidence and unblock conditions.
+No AWS credentials, Stacktape credentials, customer data, production Stacktape calls, or cloud-mutating commands were introduced.
