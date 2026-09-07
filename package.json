@@ -23,7 +23,7 @@
     "qa:p2": "npm run lint && npm run typecheck && npm run guard:secrets && npm run guard:cloud && npm run test:unit && npm run test:contract && npm run test:p2-smoke && npm test",
     "qa:p3": "npm run lint && npm run typecheck && npm run guard:secrets && npm run guard:cloud && npm run test:unit && npm run test:contract && npm run test:p2-smoke && npm test",
     "test:integration": "node --experimental-vm-modules node_modules/jest/bin/jest.js tests/integration --runInBand",
-    "qa:p4": "npm run lint && npm run typecheck && npm run guard:secrets && npm run guard:cloud && npm run test:unit && npm run test:contract && npm run test:integration && npm run test:p2-smoke && npm test"
+    "qa:p4": "npm run lint && npm run typecheck && npm run guard:secrets && npm run guard:cloud && npm run test:unit && npm run test:contract && npm run test:p2-smoke && npm run test:integration && npm test"
   },
   "engines": {
     "node": ">=22 <23"
