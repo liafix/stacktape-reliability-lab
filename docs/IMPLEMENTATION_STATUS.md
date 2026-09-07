@@ -2,7 +2,7 @@
 
 Current phase: `MVP_BUILD_OR_REVIEW`
 
-Current checkpoint: `P5_PLAYWRIGHT_GREEN`
+Current checkpoint: `P6_FAILURE_INJECTION_LOCAL_GREEN_CI_PENDING`
 
 - P0 Foundation: **GREEN / CLOSED**
 - P1 QA Core + Safety Guards: **GREEN / CLOSED**
@@ -22,7 +22,9 @@ Current checkpoint: `P5_PLAYWRIGHT_GREEN`
 - P5 implementation commit: `5338372d0cc693f94b5068465ff5618b011c98e4`
 - P5 clean GitHub Actions gate: **GREEN** (run `34098099316`)
 - P5 scope: Chromium browser automation against `127.0.0.1` only; health/runtime plus synthetic item lifecycle and stable validation/404 paths; zero external network
-- P6 Failure Injection: **NOT IMPLEMENTED**
-- P7+: **NOT IMPLEMENTED**
+- P6 Failure Injection: **LOCAL GREEN / CI PENDING**
+- P6 scope: deterministic localhost fault scenarios mapped through QA-core failure classification and retry policy; control + unhealthy + timeout + malformed JSON + transient recovery + shutdown timeout
+- P7 CI + Evidence/Reporting: **NOT IMPLEMENTED**
+- P8+: **NOT IMPLEMENTED**
 
-PASS 5 remains synthetic-data-only, loopback-only and EUR0-cloud. No AWS credentials, Stacktape credentials, production endpoints, customer data, cloud mutation, PASS 6 failure-injection expansion, Evidence UI, or Vercel deployment were introduced.
+PASS 6 remains synthetic-data-only, loopback-only and EUR0-cloud. No AWS credentials, Stacktape credentials, production endpoints, customer data, cloud mutation, P7 evidence/reporting, Evidence UI, or Vercel deployment were introduced.

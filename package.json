@@ -25,7 +25,9 @@
                     "test:integration":  "node --experimental-vm-modules node_modules/jest/bin/jest.js tests/integration --runInBand",
                     "qa:p4":  "npm run lint \u0026\u0026 npm run typecheck \u0026\u0026 npm run guard:secrets \u0026\u0026 npm run guard:cloud \u0026\u0026 npm run test:unit \u0026\u0026 npm run test:contract \u0026\u0026 npm run test:integration \u0026\u0026 npm run test:p2-smoke \u0026\u0026 npm test",
                     "test:e2e":  "playwright test --config=playwright.config.ts",
-                    "qa:p5":  "npm run lint \u0026\u0026 npm run typecheck \u0026\u0026 npm run guard:secrets \u0026\u0026 npm run guard:cloud \u0026\u0026 npm run test:unit \u0026\u0026 npm run test:contract \u0026\u0026 npm run test:integration \u0026\u0026 npm run test:p2-smoke \u0026\u0026 npm test \u0026\u0026 npm run test:e2e"
+                    "qa:p5":  "npm run lint \u0026\u0026 npm run typecheck \u0026\u0026 npm run guard:secrets \u0026\u0026 npm run guard:cloud \u0026\u0026 npm run test:unit \u0026\u0026 npm run test:contract \u0026\u0026 npm run test:integration \u0026\u0026 npm run test:p2-smoke \u0026\u0026 npm test \u0026\u0026 npm run test:e2e",
+                    "test:failure-injection":  "node --experimental-vm-modules node_modules/jest/bin/jest.js tests/failure-injection --runInBand",
+                    "qa:p6":  "npm run lint \u0026\u0026 npm run typecheck \u0026\u0026 npm run guard:secrets \u0026\u0026 npm run guard:cloud \u0026\u0026 npm run test:unit \u0026\u0026 npm run test:contract \u0026\u0026 npm run test:integration \u0026\u0026 npm run test:p2-smoke \u0026\u0026 npm test \u0026\u0026 npm run test:e2e \u0026\u0026 npm run test:failure-injection"
                 },
     "engines":  {
                     "node":  "\u003e=22 \u003c23"
