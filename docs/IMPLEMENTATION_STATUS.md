@@ -2,7 +2,7 @@
 
 Current phase: `MVP_BUILD_OR_REVIEW`
 
-Current checkpoint: `P6_FAILURE_INJECTION_LOCAL_GREEN_CI_PENDING`
+Current checkpoint: `P6_FAILURE_INJECTION_GREEN`
 
 - P0 Foundation: **GREEN / CLOSED**
 - P1 QA Core + Safety Guards: **GREEN / CLOSED**
@@ -22,7 +22,9 @@ Current checkpoint: `P6_FAILURE_INJECTION_LOCAL_GREEN_CI_PENDING`
 - P5 implementation commit: `5338372d0cc693f94b5068465ff5618b011c98e4`
 - P5 clean GitHub Actions gate: **GREEN** (run `34098099316`)
 - P5 scope: Chromium browser automation against `127.0.0.1` only; health/runtime plus synthetic item lifecycle and stable validation/404 paths; zero external network
-- P6 Failure Injection: **LOCAL GREEN / CI PENDING**
+- P6 Failure Injection: **GREEN / CLOSED**
+- P6 implementation commit: `b8e408a594f0c2ab6ab145eb7f82e8cc281fb94a`
+- P6 clean GitHub Actions gate: **GREEN** (run `34118974974`)
 - P6 scope: deterministic localhost fault scenarios mapped through QA-core failure classification and retry policy; control + unhealthy + timeout + malformed JSON + transient recovery + shutdown timeout
 - P7 CI + Evidence/Reporting: **NOT IMPLEMENTED**
 - P8+: **NOT IMPLEMENTED**
