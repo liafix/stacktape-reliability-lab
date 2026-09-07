@@ -1,21 +1,22 @@
 {
-  "extends": "./tsconfig.base.json",
-  "compilerOptions": {
-    "types": [
-      "node",
-      "jest"
-    ],
-    "allowImportingTsExtensions": true
-  },
-  "include": [
-    "packages/qa-core/src/**/*.ts",
-    "scripts/**/*.ts",
-    "tests/**/*.ts",
-    "apps/fixture-service/src/**/*.ts"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "coverage"
-  ]
+    "extends":  "./tsconfig.base.json",
+    "compilerOptions":  {
+                            "types":  [
+                                          "node",
+                                          "jest"
+                                      ],
+                            "allowImportingTsExtensions":  true
+                        },
+    "include":  [
+                    "packages/qa-core/src/**/*.ts",
+                    "scripts/**/*.ts",
+                    "tests/**/*.ts",
+                    "apps/fixture-service/src/**/*.ts",
+                    "playwright.config.ts"
+                ],
+    "exclude":  [
+                    "node_modules",
+                    "dist",
+                    "coverage"
+                ]
 }

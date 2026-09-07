@@ -1,8 +1,8 @@
-﻿# Implementation Status
+# Implementation Status
 
 Current phase: `MVP_BUILD_OR_REVIEW`
 
-Current checkpoint: `P4_INTEGRATION_GREEN`
+Current checkpoint: `P5_PLAYWRIGHT_LOCAL_GREEN_CI_PENDING`
 
 - P0 Foundation: **GREEN / CLOSED**
 - P1 QA Core + Safety Guards: **GREEN / CLOSED**
@@ -18,7 +18,9 @@ Current checkpoint: `P4_INTEGRATION_GREEN`
 - P4 clean GitHub Actions gate: **GREEN** (run `34089462981`)
 - P4 gate coverage: fresh `npm ci`, lint, typecheck, secret guard, cloud-mutation guard, unit tests, contract tests, Supertest integration tests, preserved P2 runtime smoke, full P0-P4 regression
 - P4 scope: Supertest over the real localhost HTTP server for health, items, create, 404, validation, runtime boundary, and all six deterministic fault modes
-- P5 Playwright E2E: **NOT IMPLEMENTED**
-- P6+: **NOT IMPLEMENTED**
+- P5 Playwright E2E: **LOCAL GREEN / CI PENDING**
+- P5 scope: Chromium browser automation against `127.0.0.1` only; health/runtime plus synthetic item lifecycle and stable validation/404 paths; zero external network
+- P6 Failure Injection: **NOT IMPLEMENTED**
+- P7+: **NOT IMPLEMENTED**
 
 PASS 4 remains synthetic-data-only, loopback-only and EUR0-cloud. No AWS credentials, Stacktape credentials, production endpoints, customer data, cloud mutation, or PASS 5 code were introduced.
