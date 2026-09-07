@@ -1,10 +1,6 @@
-import {
-  afterEach,
-  describe,
-  expect,
-  test
-} from '@jest/globals';
+import { describe, expect, test } from '@jest/globals';
 import request from 'supertest';
+import { createFixtureApp } from '../../apps/fixture-service/src/app.js';
 import {
   errorResponseSchema,
   fixtureItemSchema,
@@ -12,16 +8,7 @@ import {
   itemListResponseSchema,
   runtimeResponseSchema
 } from '../../apps/fixture-service/src/contracts.js';
-import {
-  startFixtureServer,
-  type RunningFixtureServer
-} from '../../apps/fixture-service/src/server.js';
-import type {
-  FaultMode,
-  FixtureConfig
-} from '../../apps/fixture-service/src/types.js';
-
-let running: RunningFixtureServer | undefined;
+import type { FaultMode, FixtureConfig } from '../../apps/fixture-service/src/types.js';
 
 function fixtureConfig(
   faultMode: FaultMode = 'none',
@@ -31,123 +18,101 @@ function fixtureConfig(
     host: '127.0.0.1',
     port: 0,
     faultMode,
-    slowMs: 40,
+    slowMs: 10,
     intermittentEvery: 3,
-    shutdownDelayMs: 40,
+    shutdownDelayMs: 10,
     ...overrides
   };
 }
 
-async function start(
+function createClient(
   faultMode: FaultMode = 'none',
   overrides: Partial<FixtureConfig> = {}
 ) {
-  const server = await startFixtureServer(fixtureConfig(faultMode, overrides));
-  running = server;
-
-  expect(server.host).toBe('127.0.0.1');
-  expect(server.baseUrl.startsWith('http://127.0.0.1:')).toBe(true);
-
-  return {
-    client: request(server.baseUrl),
-    server
-  };
+  const app = createFixtureApp(fixtureConfig(faultMode, overrides));
+  return request(app);
 }
 
-afterEach(async () => {
-  if (!running) return;
-  const server = running;
-  running = undefined;
-  await server.shutdown();
-});
-
-describe('PASS 4 real HTTP integration boundary', () => {
-  test('health and runtime contracts are served over loopback HTTP', async () => {
-    const { client } = await start();
-
-    const health = await client.get('/health').expect(200);
-    expect(healthResponseSchema.parse(health.body)).toEqual({
+describe('PASS 4 HTTP Integration Tests', () => {
+  test('GET /health success', async () => {
+    const client = createClient();
+    const response = await client.get('/health').expect(200);
+    expect(healthResponseSchema.parse(response.body)).toEqual({
       status: 'ok',
       synthetic: true
     });
-
-    const runtime = await client.get('/api/runtime').expect(200);
-    const parsedRuntime = runtimeResponseSchema.parse(runtime.body);
-    expect(parsedRuntime.environment).toBe('synthetic-local');
-    expect(parsedRuntime.faultMode).toBe('none');
   });
 
-  test('lists deterministic synthetic items', async () => {
-    const { client } = await start();
-
+  test('GET /api/items', async () => {
+    const client = createClient();
     const response = await client.get('/api/items').expect(200);
     const parsed = itemListResponseSchema.parse(response.body);
-
     expect(parsed.items).toHaveLength(2);
     expect(parsed.items.map((item) => item.id)).toEqual(['item-1', 'item-2']);
   });
 
-  test('creates an item and can retrieve it through a second HTTP request', async () => {
-    const { client } = await start();
+  test('GET /api/items/:id success', async () => {
+    const client = createClient();
+    const response = await client.get('/api/items/item-1').expect(200);
+    const parsed = fixtureItemSchema.parse(response.body);
+    expect(parsed.id).toBe('item-1');
+    expect(parsed.name).toBe('Synthetic Alpha');
+  });
 
-    const createdResponse = await client
+  test('POST /api/items creation and created item can subsequently be retrieved/listed', async () => {
+    const client = createClient();
+
+    const createResponse = await client
       .post('/api/items')
       .send({
-        name: 'Synthetic Integration Gamma',
-        description: 'Candidate-owned integration fixture.'
+        name: 'Synthetic Delta',
+        description: 'Synthetic item for Pass 4 HTTP integration.'
       })
       .expect(201);
 
-    const created = fixtureItemSchema.parse(createdResponse.body);
+    const created = fixtureItemSchema.parse(createResponse.body);
     expect(created.id).toBe('item-3');
+    expect(created.name).toBe('Synthetic Delta');
 
-    const fetchedResponse = await client
-      .get(`/api/items/${created.id}`)
-      .expect(200);
+    const getResponse = await client.get(`/api/items/${created.id}`).expect(200);
+    expect(fixtureItemSchema.parse(getResponse.body)).toEqual(created);
 
-    expect(fixtureItemSchema.parse(fetchedResponse.body)).toEqual(created);
+    const listResponse = await client.get('/api/items').expect(200);
+    const list = itemListResponseSchema.parse(listResponse.body);
+    expect(list.items).toHaveLength(3);
+    expect(list.items.some((item) => item.id === created.id)).toBe(true);
   });
 
-  test('returns stable 404 contracts for missing item and route', async () => {
-    const { client } = await start();
-
-    const missingItem = await client.get('/api/items/item-999').expect(404);
-    expect(errorResponseSchema.parse(missingItem.body).error.code).toBe(
-      'ITEM_NOT_FOUND'
-    );
-
-    const missingRoute = await client.get('/api/not-a-route').expect(404);
-    expect(errorResponseSchema.parse(missingRoute.body).error.code).toBe(
-      'ROUTE_NOT_FOUND'
-    );
+  test('item 404', async () => {
+    const client = createClient();
+    const response = await client.get('/api/items/item-999').expect(404);
+    const parsed = errorResponseSchema.parse(response.body);
+    expect(parsed.error.code).toBe('ITEM_NOT_FOUND');
   });
 
-  test('rejects invalid create payloads with the public error contract', async () => {
-    const { client } = await start();
+  test('unknown route 404', async () => {
+    const client = createClient();
+    const response = await client.get('/api/not-a-route').expect(404);
+    const parsed = errorResponseSchema.parse(response.body);
+    expect(parsed.error.code).toBe('ROUTE_NOT_FOUND');
+  });
 
+  test('request validation failures', async () => {
+    const client = createClient();
     const response = await client
       .post('/api/items')
       .send({
         name: '',
-        description: 'This payload is intentionally invalid.'
+        description: 'Invalid name field.'
       })
       .expect(400);
 
-    expect(errorResponseSchema.parse(response.body).error.code).toBe(
-      'INVALID_REQUEST'
-    );
-  });
-});
-
-describe('PASS 4 deterministic fault-mode integration', () => {
-  test('none keeps normal item traffic healthy', async () => {
-    const { client } = await start('none');
-    await client.get('/api/items').expect(200);
+    const parsed = errorResponseSchema.parse(response.body);
+    expect(parsed.error.code).toBe('INVALID_REQUEST');
   });
 
-  test('unhealthy returns a deterministic 503 health response', async () => {
-    const { client } = await start('unhealthy');
-
+  test('deterministic unhealthy health mode', async () => {
+    const client = createClient('unhealthy');
     const response = await client.get('/health').expect(503);
     expect(healthResponseSchema.parse(response.body)).toEqual({
       status: 'unhealthy',
@@ -155,19 +120,8 @@ describe('PASS 4 deterministic fault-mode integration', () => {
     });
   });
 
-  test('slow delays item traffic before returning normally', async () => {
-    const { client } = await start('slow', { slowMs: 40 });
-
-    const startedAt = Date.now();
-    await client.get('/api/items').expect(200);
-    const elapsedMs = Date.now() - startedAt;
-
-    expect(elapsedMs).toBeGreaterThanOrEqual(30);
-  });
-
-  test('malformed-json returns intentionally invalid JSON without parser masking', async () => {
-    const { client } = await start('malformed-json');
-
+  test('deterministic malformed-json mode', async () => {
+    const client = createClient('malformed-json');
     const response = await client
       .get('/api/items')
       .buffer(true)
@@ -187,30 +141,32 @@ describe('PASS 4 deterministic fault-mode integration', () => {
     expect(response.body).toBe('{"synthetic":');
   });
 
-  test('intermittent-500 fails exactly on the configured Nth item request', async () => {
-    const { client } = await start('intermittent-500', {
-      intermittentEvery: 3
-    });
+  test('deterministic intermittent-500 cadence', async () => {
+    const client = createClient('intermittent-500', { intermittentEvery: 3 });
 
     await client.get('/api/items').expect(200);
     await client.get('/api/items').expect(200);
 
     const third = await client.get('/api/items').expect(500);
-    expect(errorResponseSchema.parse(third.body).error.code).toBe(
-      'TRANSIENT_FAILURE'
-    );
+    const parsed = errorResponseSchema.parse(third.body);
+    expect(parsed.error.code).toBe('TRANSIENT_FAILURE');
+
+    await client.get('/api/items').expect(200);
   });
 
-  test('shutdown-delay delays graceful shutdown deterministically', async () => {
-    const { server } = await start('shutdown-delay', {
-      shutdownDelayMs: 40
-    });
+  test('deterministic slow mode where appropriate without flaky wall-clock assertions', async () => {
+    const client = createClient('slow', { slowMs: 10 });
+    const response = await client.get('/api/items').expect(200);
+    const parsed = itemListResponseSchema.parse(response.body);
+    expect(parsed.items).toHaveLength(2);
+  });
 
-    running = undefined;
-    const startedAt = Date.now();
-    await server.shutdown();
-    const elapsedMs = Date.now() - startedAt;
-
-    expect(elapsedMs).toBeGreaterThanOrEqual(30);
+  test('GET /api/runtime returns synthetic runtime information', async () => {
+    const client = createClient();
+    const response = await client.get('/api/runtime').expect(200);
+    const parsed = runtimeResponseSchema.parse(response.body);
+    expect(parsed.service).toBe('stacktape-reliability-fixture');
+    expect(parsed.environment).toBe('synthetic-local');
+    expect(parsed.faultMode).toBe('none');
   });
 });

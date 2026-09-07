@@ -34,9 +34,9 @@ jobs:
         run: npm run test:unit
       - name: Contract tests
         run: npm run test:contract
-      - name: PASS 4 integration tests
-        run: npm run test:integration
-      - name: Preserve P2 runtime smoke
+      - name: P2 runtime smoke
         run: npm run test:p2-smoke
-      - name: Full P0-P4 regression
+      - name: Pass 4 integration tests
+        run: npm run test:integration
+      - name: Full regression suite
         run: npm test
