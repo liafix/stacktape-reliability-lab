@@ -1,0 +1,42 @@
+name: P4 Integration Gate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  p4:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Use Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.23.2'
+          cache: npm
+      - name: Fresh install
+        run: npm ci --no-audit --fund=false
+      - name: Lint
+        run: npm run lint
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Secret guard
+        run: npm run guard:secrets
+      - name: Cloud mutation guard
+        run: npm run guard:cloud
+      - name: Unit tests
+        run: npm run test:unit
+      - name: Contract tests
+        run: npm run test:contract
+      - name: PASS 4 integration tests
+        run: npm run test:integration
+      - name: Preserve P2 runtime smoke
+        run: npm run test:p2-smoke
+      - name: Full P0-P4 regression
+        run: npm test

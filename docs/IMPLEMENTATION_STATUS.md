@@ -2,7 +2,7 @@
 
 Current phase: `MVP_BUILD_OR_REVIEW`
 
-Current checkpoint: `P3_UNIT_CONTRACT_GREEN`
+Current checkpoint: `P4_INTEGRATION_LOCAL_GREEN_CI_PENDING`
 
 - P0 Foundation: **GREEN / CLOSED**
 - P1 QA Core + Safety Guards: **GREEN / CLOSED**
@@ -13,8 +13,9 @@ Current checkpoint: `P3_UNIT_CONTRACT_GREEN`
 - P3 Unit + Contract Tests: **GREEN / CLOSED**
 - P3 implementation commit: `0c2655cff8f67d93d40d894e4505132fc279e0e6`
 - P3 clean GitHub Actions gate: **GREEN** (run `34040306881`)
-- P3 gate coverage: fresh `npm ci`, lint, typecheck, secret guard, cloud-mutation guard, unit tests, contract tests, preserved P2 runtime smoke, full P0-P3 regression
-- P4 Integration Tests: **NOT IMPLEMENTED**
-- P5+: **NOT IMPLEMENTED**
+- P4 Integration Tests: **LOCAL GREEN / CI PENDING**
+- P4 scope: Supertest over the real localhost HTTP server for health, items, create, 404, validation, runtime boundary, and all six deterministic fault modes
+- P5 Playwright E2E: **NOT IMPLEMENTED**
+- P6+: **NOT IMPLEMENTED**
 
-Pass 3 is limited to unit and contract coverage plus shared synthetic fixture schemas. No Supertest integration suite, external network behavior, AWS/Stacktape credentials, production endpoints, customer data, cloud mutation, or Pass 4 code was introduced.
+PASS 4 remains synthetic-data-only, loopback-only and EUR0-cloud. No AWS credentials, Stacktape credentials, production endpoints, customer data, cloud mutation, or PASS 5 code were introduced.

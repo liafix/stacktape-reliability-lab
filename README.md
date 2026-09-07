@@ -8,7 +8,8 @@ Independent candidate QA automation demonstrator for the Stacktape QA Automation
 - Pass 1: QA-core contracts plus secret/cloud-mutation safety guards
 - Pass 2: synthetic localhost fixture service implemented
 - Pass 3: unit + contract coverage for the synthetic fixture boundary
-- Pass 4+: intentionally not implemented yet
+- Pass 4: Supertest HTTP integration coverage against the loopback-only synthetic fixture service
+- Pass 5+: intentionally not implemented yet
 
 ## Safety boundary
 
