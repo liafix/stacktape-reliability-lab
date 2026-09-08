@@ -1,54 +1,56 @@
 {
-    "name":  "stacktape-reliability-lab",
-    "version":  "0.1.0",
-    "private":  true,
-    "description":  "Independent candidate QA automation demonstrator based on public Stacktape interfaces.",
-    "type":  "module",
-    "workspaces":  [
-                       "apps/*",
-                       "packages/*"
-                   ],
-    "scripts":  {
-                    "lint":  "eslint . --max-warnings=0",
-                    "typecheck":  "tsc -p tsconfig.json --noEmit",
-                    "test":  "node --experimental-vm-modules node_modules/jest/bin/jest.js --runInBand",
-                    "test:smoke":  "node --experimental-vm-modules node_modules/jest/bin/jest.js tests/smoke --runInBand",
-                    "test:unit":  "node --experimental-vm-modules node_modules/jest/bin/jest.js tests/unit --runInBand",
-                    "test:contract":  "node --experimental-vm-modules node_modules/jest/bin/jest.js tests/contract --runInBand",
-                    "guard:secrets":  "node --no-warnings --experimental-strip-types scripts/secret-check.ts",
-                    "guard:cloud":  "node --no-warnings --experimental-strip-types scripts/cloud-mutation-check.ts",
-                    "qa:p1":  "npm run lint \u0026\u0026 npm run typecheck \u0026\u0026 npm run test:unit \u0026\u0026 npm run test:contract \u0026\u0026 npm run guard:secrets \u0026\u0026 npm run guard:cloud",
-                    "fixture:start":  "node --no-warnings --experimental-strip-types apps/fixture-service/src/server.ts",
-                    "test:p2-smoke":  "node --no-warnings --experimental-strip-types scripts/p2-smoke.ts",
-                    "qa:p2":  "npm run lint \u0026\u0026 npm run typecheck \u0026\u0026 npm run guard:secrets \u0026\u0026 npm run guard:cloud \u0026\u0026 npm run test:unit \u0026\u0026 npm run test:contract \u0026\u0026 npm run test:p2-smoke \u0026\u0026 npm test",
-                    "qa:p3":  "npm run lint \u0026\u0026 npm run typecheck \u0026\u0026 npm run guard:secrets \u0026\u0026 npm run guard:cloud \u0026\u0026 npm run test:unit \u0026\u0026 npm run test:contract \u0026\u0026 npm run test:p2-smoke \u0026\u0026 npm test",
-                    "test:integration":  "node --experimental-vm-modules node_modules/jest/bin/jest.js tests/integration --runInBand",
-                    "qa:p4":  "npm run lint \u0026\u0026 npm run typecheck \u0026\u0026 npm run guard:secrets \u0026\u0026 npm run guard:cloud \u0026\u0026 npm run test:unit \u0026\u0026 npm run test:contract \u0026\u0026 npm run test:integration \u0026\u0026 npm run test:p2-smoke \u0026\u0026 npm test",
-                    "test:e2e":  "playwright test --config=playwright.config.ts",
-                    "qa:p5":  "npm run lint \u0026\u0026 npm run typecheck \u0026\u0026 npm run guard:secrets \u0026\u0026 npm run guard:cloud \u0026\u0026 npm run test:unit \u0026\u0026 npm run test:contract \u0026\u0026 npm run test:integration \u0026\u0026 npm run test:p2-smoke \u0026\u0026 npm test \u0026\u0026 npm run test:e2e",
-                    "test:failure-injection":  "node --experimental-vm-modules node_modules/jest/bin/jest.js tests/failure-injection --runInBand",
-                    "qa:p6":  "npm run lint \u0026\u0026 npm run typecheck \u0026\u0026 npm run guard:secrets \u0026\u0026 npm run guard:cloud \u0026\u0026 npm run test:unit \u0026\u0026 npm run test:contract \u0026\u0026 npm run test:integration \u0026\u0026 npm run test:p2-smoke \u0026\u0026 npm test \u0026\u0026 npm run test:e2e \u0026\u0026 npm run test:failure-injection"
-                },
-    "engines":  {
-                    "node":  "\u003e=22 \u003c23"
-                },
-    "devDependencies":  {
-                            "@eslint/js":  "9.39.5",
-                            "@playwright/test":  "1.63.0",
-                            "@types/express":  "5.0.6",
-                            "@types/jest":  "29.5.14",
-                            "@types/node":  "22.20.1",
-                            "@types/supertest":  "7.2.1",
-                            "eslint":  "9.39.5",
-                            "globals":  "16.5.0",
-                            "jest":  "29.7.0",
-                            "supertest":  "7.2.2",
-                            "ts-jest":  "29.4.12",
-                            "typescript":  "6.0.3",
-                            "typescript-eslint":  "8.69.0"
-                        },
-    "dependencies":  {
-                         "express":  "5.2.1",
-                         "zod":  "4.5.4"
-                     }
+    "name": "stacktape-reliability-lab",
+    "version": "0.1.0",
+    "private": true,
+    "description": "Independent candidate QA automation demonstrator based on public Stacktape interfaces.",
+    "type": "module",
+    "workspaces": [
+        "apps/*",
+        "packages/*"
+    ],
+    "scripts": {
+        "lint": "eslint . --max-warnings=0",
+        "typecheck": "tsc -p tsconfig.json --noEmit",
+        "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --runInBand",
+        "test:smoke": "node --experimental-vm-modules node_modules/jest/bin/jest.js tests/smoke --runInBand",
+        "test:unit": "node --experimental-vm-modules node_modules/jest/bin/jest.js tests/unit --runInBand",
+        "test:contract": "node --experimental-vm-modules node_modules/jest/bin/jest.js tests/contract --runInBand",
+        "guard:secrets": "node --no-warnings --experimental-strip-types scripts/secret-check.ts",
+        "guard:cloud": "node --no-warnings --experimental-strip-types scripts/cloud-mutation-check.ts",
+        "qa:p1": "npm run lint && npm run typecheck && npm run test:unit && npm run test:contract && npm run guard:secrets && npm run guard:cloud",
+        "fixture:start": "node --no-warnings --experimental-strip-types apps/fixture-service/src/server.ts",
+        "test:p2-smoke": "node --no-warnings --experimental-strip-types scripts/p2-smoke.ts",
+        "qa:p2": "npm run lint && npm run typecheck && npm run guard:secrets && npm run guard:cloud && npm run test:unit && npm run test:contract && npm run test:p2-smoke && npm test",
+        "qa:p3": "npm run lint && npm run typecheck && npm run guard:secrets && npm run guard:cloud && npm run test:unit && npm run test:contract && npm run test:p2-smoke && npm test",
+        "test:integration": "node --experimental-vm-modules node_modules/jest/bin/jest.js tests/integration --runInBand",
+        "qa:p4": "npm run lint && npm run typecheck && npm run guard:secrets && npm run guard:cloud && npm run test:unit && npm run test:contract && npm run test:integration && npm run test:p2-smoke && npm test",
+        "test:e2e": "playwright test --config=playwright.config.ts",
+        "qa:p5": "npm run lint && npm run typecheck && npm run guard:secrets && npm run guard:cloud && npm run test:unit && npm run test:contract && npm run test:integration && npm run test:p2-smoke && npm test && npm run test:e2e",
+        "test:failure-injection": "node --experimental-vm-modules node_modules/jest/bin/jest.js tests/failure-injection --runInBand",
+        "qa:p6": "npm run lint && npm run typecheck && npm run guard:secrets && npm run guard:cloud && npm run test:unit && npm run test:contract && npm run test:integration && npm run test:p2-smoke && npm test && npm run test:e2e && npm run test:failure-injection",
+        "evidence:generate": "node --no-warnings --experimental-strip-types scripts/p7-evidence.ts",
+        "qa:p7": "npm run qa:p6 && npm run evidence:generate"
+    },
+    "engines": {
+        "node": ">=22 <23"
+    },
+    "devDependencies": {
+        "@eslint/js": "9.39.5",
+        "@playwright/test": "1.63.0",
+        "@types/express": "5.0.6",
+        "@types/jest": "29.5.14",
+        "@types/node": "22.20.1",
+        "@types/supertest": "7.2.1",
+        "eslint": "9.39.5",
+        "globals": "16.5.0",
+        "jest": "29.7.0",
+        "supertest": "7.2.2",
+        "ts-jest": "29.4.12",
+        "typescript": "6.0.3",
+        "typescript-eslint": "8.69.0"
+    },
+    "dependencies": {
+        "express": "5.2.1",
+        "zod": "4.5.4"
+    }
 }

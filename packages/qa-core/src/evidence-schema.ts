@@ -1,4 +1,4 @@
-﻿import { FAILURE_CODES, type EvidenceRecord, type FailureCode } from './types.js';
+import { FAILURE_CODES, type EvidenceRecord, type FailureCode } from './types.ts';
 
 function isFailureCode(value: unknown): value is FailureCode {
   return typeof value === 'string' && (FAILURE_CODES as readonly string[]).includes(value);

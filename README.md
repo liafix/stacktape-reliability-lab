@@ -11,7 +11,8 @@ Independent candidate QA automation demonstrator for the Stacktape QA Automation
 - Pass 4: Supertest HTTP integration coverage against the loopback-only synthetic fixture service
 - Pass 5: Chromium Playwright E2E against the loopback-only synthetic fixture service
 - Pass 6: deterministic failure injection with QA-core classification and retry policy checks
-- Pass 7+: intentionally not implemented yet
+- Pass 7: CI evidence generation, machine-readable JSON, reviewer-readable Markdown, and GitHub Actions artifact upload
+- Pass 8: intentionally not implemented yet
 
 ## Safety boundary
 

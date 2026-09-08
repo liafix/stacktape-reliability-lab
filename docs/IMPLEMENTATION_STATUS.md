@@ -2,7 +2,7 @@
 
 Current phase: `MVP_BUILD_OR_REVIEW`
 
-Current checkpoint: `P6_FAILURE_INJECTION_GREEN`
+Current checkpoint: `P7_CI_EVIDENCE_LOCAL_GREEN_CI_PENDING`
 
 - P0 Foundation: **GREEN / CLOSED**
 - P1 QA Core + Safety Guards: **GREEN / CLOSED**
@@ -26,7 +26,8 @@ Current checkpoint: `P6_FAILURE_INJECTION_GREEN`
 - P6 implementation commit: `b8e408a594f0c2ab6ab145eb7f82e8cc281fb94a`
 - P6 clean GitHub Actions gate: **GREEN** (run `34118974974`)
 - P6 scope: deterministic localhost fault scenarios mapped through QA-core failure classification and retry policy; control + unhealthy + timeout + malformed JSON + transient recovery + shutdown timeout
-- P7 CI + Evidence/Reporting: **NOT IMPLEMENTED**
-- P8+: **NOT IMPLEMENTED**
+- P7 CI + Evidence/Reporting: **LOCAL GREEN / CI PENDING**
+- P7 scope: preserves P0-P6 gates, generates validated 5-scenario JSON + Markdown evidence from localhost failure observations, verifies the evidence contract, and uploads the evidence directory as a GitHub Actions artifact
+- P8 Evidence UI + Release/Vercel: **NOT IMPLEMENTED**
 
-PASS 6 remains synthetic-data-only, loopback-only and EUR0-cloud. No AWS credentials, Stacktape credentials, production endpoints, customer data, cloud mutation, P7 evidence/reporting, Evidence UI, or Vercel deployment were introduced.
+PASS 7 remains synthetic-data-only, loopback-only and EUR0-cloud. No AWS credentials, Stacktape credentials, production endpoints, customer data, deployment/cloud mutation, PASS 8 Evidence UI, or Vercel deployment were introduced.

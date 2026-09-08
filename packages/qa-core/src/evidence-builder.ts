@@ -1,4 +1,4 @@
-﻿import { isEvidenceRecord } from './evidence-schema.js';
+import { isEvidenceRecord } from './evidence-schema.ts';
 import type { EvidenceRecord, EvidenceSummary } from './types.js';
 
 export function buildEvidenceSummary(records: readonly EvidenceRecord[]): EvidenceSummary {
