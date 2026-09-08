@@ -1,0 +1,14 @@
+{
+  "releaseVersion": "P8-candidate-release",
+  "repository": "liafix/stacktape-reliability-lab",
+  "repositoryUrl": "https://github.com/liafix/stacktape-reliability-lab",
+  "p7ImplementationCommit": "a3c4df5f70f6d5f91469c4358c099b63aff35310",
+  "p7ClosureCommit": "f4c7fdd42e0c760acb00c49d6438ddbd552f969f",
+  "p7WorkflowRunId": 34198806637,
+  "p7WorkflowRunUrl": "https://github.com/liafix/stacktape-reliability-lab/actions/runs/34198806637",
+  "p7ArtifactId": 10044979752,
+  "p7ArtifactName": "p7-ci-evidence-a3c4df5f70f6d5f91469c4358c099b63aff35310",
+  "p7ArtifactDigest": "sha256:900198da641a40bcda3d791e8b841b1d0c225941b90ebe6f3c3bd44f46bd3cb5",
+  "evidenceStatus": "GREEN",
+  "runtimeBoundary": "static-snapshot-only"
+}

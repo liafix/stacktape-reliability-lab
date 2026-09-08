@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "total": 5,
+  "passed": 5,
+  "failed": 0,
+  "scenarios": [
+    {
+      "scenarioId": "P6-INTERMITTENT-500",
+      "expected": "TRANSIENT_FAILURE",
+      "actual": "TRANSIENT_FAILURE",
+      "passed": true,
+      "durationMs": 8,
+      "details": "statuses=200,500,200; retry=true"
+    },
+    {
+      "scenarioId": "P6-MALFORMED-JSON",
+      "expected": "RESPONSE_CONTRACT_FAILED",
+      "actual": "RESPONSE_CONTRACT_FAILED",
+      "passed": true,
+      "durationMs": 7,
+      "details": "status=200; malformed=true; retry=false"
+    },
+    {
+      "scenarioId": "P6-SHUTDOWN-DELAY",
+      "expected": "SHUTDOWN_TIMEOUT",
+      "actual": "SHUTDOWN_TIMEOUT",
+      "passed": true,
+      "durationMs": 121,
+      "details": "budgetMs=30; exceededBudget=true; retry=false"
+    },
+    {
+      "scenarioId": "P6-SLOW",
+      "expected": "TIMEOUT",
+      "actual": "TIMEOUT",
+      "passed": true,
+      "durationMs": 31,
+      "details": "timeoutBudgetMs=30; timedOut=true; retry=true"
+    },
+    {
+      "scenarioId": "P6-UNHEALTHY",
+      "expected": "HEALTH_CHECK_FAILED",
+      "actual": "HEALTH_CHECK_FAILED",
+      "passed": true,
+      "durationMs": 24,
+      "details": "status=503; retry=true; nextAttempt=1"
+    }
+  ]
+}

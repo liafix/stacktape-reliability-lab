@@ -29,7 +29,11 @@
         "test:failure-injection": "node --experimental-vm-modules node_modules/jest/bin/jest.js tests/failure-injection --runInBand",
         "qa:p6": "npm run lint && npm run typecheck && npm run guard:secrets && npm run guard:cloud && npm run test:unit && npm run test:contract && npm run test:integration && npm run test:p2-smoke && npm test && npm run test:e2e && npm run test:failure-injection",
         "evidence:generate": "node --no-warnings --experimental-strip-types scripts/p7-evidence.ts",
-        "qa:p7": "npm run qa:p6 && npm run evidence:generate"
+        "qa:p7": "npm run qa:p6 && npm run evidence:generate",
+        "build:evidence-ui": "node --no-warnings --experimental-strip-types scripts/p8-build-evidence-ui.ts",
+        "preview:evidence-ui": "node --no-warnings --experimental-strip-types scripts/p8-preview-server.ts",
+        "test:evidence-ui": "playwright test --config=tests/evidence-ui/playwright.config.ts",
+        "qa:p8": "npm run qa:p7 && npm run build:evidence-ui && npm run test:evidence-ui"
     },
     "engines": {
         "node": ">=22 <23"

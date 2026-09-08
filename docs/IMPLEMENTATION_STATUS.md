@@ -2,7 +2,7 @@
 
 Current phase: `MVP_BUILD_OR_REVIEW`
 
-Current checkpoint: `P7_CI_EVIDENCE_GREEN`
+Current checkpoint: `P8_EVIDENCE_UI_LOCAL_GREEN_CI_VERCEL_PENDING`
 
 - P0 Foundation: **GREEN / CLOSED**
 - P1 QA Core + Safety Guards: **GREEN / CLOSED**
@@ -31,6 +31,7 @@ Current checkpoint: `P7_CI_EVIDENCE_GREEN`
 - P7 clean GitHub Actions gate: **GREEN** (run `34198806637`)
 - P7 evidence artifact: `p7-ci-evidence-a3c4df5f70f6d5f91469c4358c099b63aff35310` (artifact `10044979752`)
 - P7 scope: preserves P0-P6 gates, generates validated 5-scenario JSON + Markdown evidence from localhost failure observations, verifies the evidence contract, and uploads the evidence directory as a GitHub Actions artifact
-- P8 Evidence UI + Release/Vercel: **NOT IMPLEMENTED**
+- P8 Evidence UI + Release/Vercel: **LOCAL GREEN / CI + VERCEL PENDING**
+- P8 scope: static candidate-facing Evidence UI frozen from verified P7 CI artifact `10044979752`; strict static Vercel build config; separate desktop/mobile Playwright release gate; public fixture/fault runtime remains prohibited
 
-PASS 7 remains synthetic-data-only, loopback-only and EUR0-cloud. No AWS credentials, Stacktape credentials, production endpoints, customer data, deployment/cloud mutation, PASS 8 Evidence UI, or Vercel deployment were introduced.
+PASS 8 preserves the QA runtime boundary: fixture/failure execution remains synthetic-data-only and loopback-only. The only authorized public surface is a static, read-only evidence snapshot. No AWS credentials, Stacktape credentials, production endpoints, customer data, public fault controls, or Stacktape/AWS cloud mutation are introduced.

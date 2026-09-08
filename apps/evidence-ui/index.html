@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#071019">
+  <meta name="description" content="Independent candidate QA automation evidence for the Stacktape Reliability Lab.">
+  <meta property="og:title" content="Stacktape Reliability Lab â€” QA Evidence">
+  <meta property="og:description" content="Deterministic failure injection, browser verification and CI-backed evidence in a static candidate release.">
+  <meta property="og:type" content="website">
+  <title>Stacktape Reliability Lab â€” QA Evidence</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script type="module" src="./app.js"></script>
+</head>
+<body>
+  <div class="ambient ambient-one" aria-hidden="true"></div>
+  <div class="ambient ambient-two" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="Stacktape Reliability Lab home">
+      <span class="brand-mark" aria-hidden="true">R</span>
+      <span>Reliability Lab</span>
+    </a>
+    <nav class="header-actions" aria-label="Primary navigation">
+      <a href="#evidence">Evidence</a>
+      <a href="#architecture">Architecture</a>
+      <a class="button button-secondary" href="https://github.com/liafix/stacktape-reliability-lab" target="_blank" rel="noreferrer">
+        GitHub source
+      </a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="context-line">Independent candidate QA automation demonstrator</p>
+        <h1>Reliability, proved with evidence.</h1>
+        <p class="hero-lede">
+          A synthetic, localhost-first test system that turns deterministic failures into
+          classified, retry-aware and CI-verifiable evidence â€” without touching production.
+        </p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#evidence">Inspect CI evidence</a>
+          <a class="text-link" id="workflow-link" href="https://github.com/liafix/stacktape-reliability-lab/actions/runs/34198806637" target="_blank" rel="noreferrer">
+            Open verified workflow
+          </a>
+        </div>
+      </div>
+
+      <aside class="hero-console" aria-label="Release status">
+        <div class="console-topline">
+          <span>Candidate release</span>
+          <span class="live-dot">verified</span>
+        </div>
+        <div class="signal">
+          <span class="signal-value" id="pass-ratio">â€”</span>
+          <span class="signal-label">failure scenarios matched</span>
+        </div>
+        <div class="signal-grid">
+          <div>
+            <span class="mini-label">Schema</span>
+            <strong id="schema-version">â€”</strong>
+          </div>
+          <div>
+            <span class="mini-label">Failed</span>
+            <strong id="failed-count">â€”</strong>
+          </div>
+          <div>
+            <span class="mini-label">Runtime</span>
+            <strong>Static</strong>
+          </div>
+        </div>
+        <div class="pipeline-line" aria-label="Pass pipeline">
+          <span>P0</span><i></i><span>P1</span><i></i><span>P2</span><i></i><span>P3</span><i></i>
+          <span>P4</span><i></i><span>P5</span><i></i><span>P6</span><i></i><span>P7</span>
+        </div>
+      </aside>
+    </section>
+
+    <section class="proof-strip" aria-label="Quality proof">
+      <div>
+        <span class="proof-value">P0â€“P7</span>
+        <span class="proof-label">gated delivery chain</span>
+      </div>
+      <div>
+        <span class="proof-value">127.0.0.1</span>
+        <span class="proof-label">test runtime boundary</span>
+      </div>
+      <div>
+        <span class="proof-value">0</span>
+        <span class="proof-label">production calls</span>
+      </div>
+      <div>
+        <span class="proof-value">CI</span>
+        <span class="proof-label">source of release evidence</span>
+      </div>
+    </section>
+
+    <section class="section" id="evidence">
+      <div class="section-heading">
+        <div>
+          <p class="section-index">01 / Failure evidence</p>
+          <h2>Observed failure. Expected classification. Same result.</h2>
+        </div>
+        <p>
+          The public UI renders a frozen snapshot from the verified P7 GitHub Actions artifact,
+          not a live fault-control endpoint.
+        </p>
+      </div>
+
+      <div class="evidence-summary">
+        <div class="progress-track" aria-hidden="true">
+          <div class="progress-fill" id="progress-fill"></div>
+        </div>
+        <div>
+          <strong id="summary-copy">Loading evidenceâ€¦</strong>
+          <span>Deterministic CI scenarios</span>
+        </div>
+      </div>
+
+      <div class="scenario-list" id="scenario-list" aria-live="polite">
+        <p class="loading-state">Loading verified evidence snapshotâ€¦</p>
+      </div>
+    </section>
+
+    <section class="section architecture-section" id="architecture">
+      <div class="section-heading">
+        <div>
+          <p class="section-index">02 / Architecture</p>
+          <h2>A small QA system with deliberate boundaries.</h2>
+        </div>
+        <p>
+          Each layer exists to make failures reproducible, explainable and reviewable before
+          anything reaches a real environment.
+        </p>
+      </div>
+
+      <ol class="architecture-flow">
+        <li>
+          <span>01</span>
+          <div><strong>QA Core</strong><p>Failure codes, evidence schema and retry decisions.</p></div>
+        </li>
+        <li>
+          <span>02</span>
+          <div><strong>Synthetic Fixture</strong><p>Local HTTP service with six deterministic fault modes.</p></div>
+        </li>
+        <li>
+          <span>03</span>
+          <div><strong>Integration + Browser</strong><p>Contract, Supertest and Playwright coverage on loopback only.</p></div>
+        </li>
+        <li>
+          <span>04</span>
+          <div><strong>Failure Injection</strong><p>Timeout, unhealthy, malformed, transient and lifecycle behavior.</p></div>
+        </li>
+        <li>
+          <span>05</span>
+          <div><strong>CI Evidence</strong><p>Validated JSON/Markdown artifact promoted into this static release.</p></div>
+        </li>
+      </ol>
+    </section>
+
+    <section class="section safety-section" id="safety">
+      <div class="safety-copy">
+        <p class="section-index">03 / Safety boundary</p>
+        <h2>The public surface is intentionally boring at runtime.</h2>
+        <p>
+          Vercel serves only static HTML, CSS, JavaScript and the frozen evidence snapshot.
+          The synthetic fixture, failure modes and test execution remain local/CI concerns.
+        </p>
+      </div>
+
+      <dl class="boundary-list">
+        <div><dt>Data</dt><dd>Synthetic only</dd></div>
+        <div><dt>Test targets</dt><dd>Loopback only</dd></div>
+        <div><dt>AWS credentials</dt><dd>None</dd></div>
+        <div><dt>Stacktape credentials</dt><dd>None</dd></div>
+        <div><dt>Production endpoints</dt><dd>None</dd></div>
+        <div><dt>Public fault controls</dt><dd>None</dd></div>
+      </dl>
+    </section>
+
+    <section class="release-panel" id="release">
+      <div>
+        <p class="section-index">04 / Release provenance</p>
+        <h2>Trace the public evidence back to CI.</h2>
+      </div>
+      <div class="release-metadata">
+        <div><span>Evidence status</span><strong id="release-status">â€”</strong></div>
+        <div><span>P7 run</span><strong id="run-id">â€”</strong></div>
+        <div><span>Artifact</span><strong id="artifact-id">â€”</strong></div>
+        <div><span>Evidence commit</span><code id="evidence-commit">â€”</code></div>
+        <div class="digest-row"><span>Artifact digest</span><code id="artifact-digest">â€”</code></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>
+      Independent candidate QA demonstrator. Based exclusively on public interfaces and candidate-owned
+      synthetic test logic. Not an official Stacktape product and not a representation of Stacktape internal QA.
+    </p>
+    <a href="https://github.com/liafix/stacktape-reliability-lab/blob/main/DISCLAIMER.md" target="_blank" rel="noreferrer">
+      Full disclaimer
+    </a>
+  </footer>
+</body>
+</html>
