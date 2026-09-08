@@ -2,7 +2,7 @@
 
 Current phase: `MVP_BUILD_OR_REVIEW`
 
-Current checkpoint: `P7_CI_EVIDENCE_LOCAL_GREEN_CI_PENDING`
+Current checkpoint: `P7_CI_EVIDENCE_GREEN`
 
 - P0 Foundation: **GREEN / CLOSED**
 - P1 QA Core + Safety Guards: **GREEN / CLOSED**
@@ -26,7 +26,10 @@ Current checkpoint: `P7_CI_EVIDENCE_LOCAL_GREEN_CI_PENDING`
 - P6 implementation commit: `b8e408a594f0c2ab6ab145eb7f82e8cc281fb94a`
 - P6 clean GitHub Actions gate: **GREEN** (run `34118974974`)
 - P6 scope: deterministic localhost fault scenarios mapped through QA-core failure classification and retry policy; control + unhealthy + timeout + malformed JSON + transient recovery + shutdown timeout
-- P7 CI + Evidence/Reporting: **LOCAL GREEN / CI PENDING**
+- P7 CI + Evidence/Reporting: **GREEN / CLOSED**
+- P7 implementation commit: `a3c4df5f70f6d5f91469c4358c099b63aff35310`
+- P7 clean GitHub Actions gate: **GREEN** (run `34198806637`)
+- P7 evidence artifact: `p7-ci-evidence-a3c4df5f70f6d5f91469c4358c099b63aff35310` (artifact `10044979752`)
 - P7 scope: preserves P0-P6 gates, generates validated 5-scenario JSON + Markdown evidence from localhost failure observations, verifies the evidence contract, and uploads the evidence directory as a GitHub Actions artifact
 - P8 Evidence UI + Release/Vercel: **NOT IMPLEMENTED**
 
